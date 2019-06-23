@@ -1,0 +1,7 @@
+[package]
+name = "render_frog"
+version = "0.1.0"
+authors = ["Vincent"]
+edition = "2018"
+
+[dependencies]
