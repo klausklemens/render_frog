@@ -1,3 +1,4 @@
+use crate::util::color::ColorRGB;
 use super::drawable::Drawable;
 
 pub struct Vector {
@@ -6,6 +7,7 @@ pub struct Vector {
     pub z: f32,
 }
 
+#[allow(dead_code)] // TODO: REMOVE
 impl Vector {
     pub fn new(x: f32, y: f32, z: f32) -> Vector {
         Vector {
@@ -15,8 +17,12 @@ impl Vector {
         }
     }
 
+    pub fn clone(&self) -> Vector {
+        Vector::new(self.x, self.y, self.z)
+    }
+
     pub fn dot(&self, v: &Vector) -> f32 {
-         (self.x * v.x) + (self.y + v.y) + (self.z + v.z)
+        (self.x * v.x) + (self.y + v.y) + (self.z + v.z)
     }
 
     pub fn norm(&self) -> f32 {
@@ -44,5 +50,13 @@ impl Vector {
 impl Drawable for Vector {
     fn distance(&self, point: &Vector) -> f32 {
         ((point.x - self.x).powi(2) + (point.y - self.y).powi(2) + (point.z - self.z).powi(2)).powf(0.5)   
+    }
+
+    fn get_color(&self) -> ColorRGB {
+        ColorRGB::new(0, 0, 0)
+    }
+
+    fn get_surface_normal(&self, normal_position: &Vector) -> Vector {
+        Vector::new(0.0, 0.0, 0.0)
     }
 }
